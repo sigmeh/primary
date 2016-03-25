@@ -9,22 +9,23 @@ current_time = datetime.now()
 
 def remove_markup(r):
 	'''excise contents of script tags and remove markup'''
-	'''
+	#'''
 	start=0
 	while start != -1:
-		start=r.find('<script')
+		start=r.find('<script')					#remove all script data
 		end=r.find('</script>',start)
 		if start == -1 or end == -1:
 			break
 		r=r[:start]+r[end+9:]
+	
 	start=0
 	while start != -1:
-		start=r.find('<')
+		start=r.find('<')						#remove all markup (invisible to user)
 		end=r.find('>',start)
 		if start == -1 or end == -1:
 			break
 		r=r[:start]+r[end+1:]
-	'''
+	
 	return r
 
 def main():
@@ -48,13 +49,12 @@ def main():
 					names[name][1] += 1
 		print site[0],names
 		results[site[0]] = {'url':site[1],'names':names,'time':str(datetime.now())}
-
-		
+	print 'Completed in:',int(100*(time()-app_start))/100.,'s'
+	note = raw_input('enter notes for this data: ')	
+	if note:
+		results['note'] = note
 	with open('data_'+str(datetime.now()).split('.')[0].replace(' ','_'),'w') as f:
 		f.write(json.dumps(results))
-	
-	print 'Completed in:',int(100*(time()-app_start))/100.,'s'
 
-	
 if __name__ == '__main__':
 	main()

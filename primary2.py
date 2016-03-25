@@ -2,14 +2,10 @@
 #file:primary2.py
 import json,subprocess
 def main():
-	with open('names.txt','r') as f:
-		names = f.read().split('\n')
-	print names
 	options = subprocess.Popen(['ls data_*'],stdout=subprocess.PIPE,shell=True).communicate()[0].split()
 	for i in range(len(options)):
 		print i,options[i]
-	selection = 0
-	#'''
+
 	selection = ''
 	while not (selection in range(0,len(options))):
 		selection = raw_input('Select data entry: ')
@@ -17,15 +13,36 @@ def main():
 			selection = int(selection)
 		except:
 			print '  *not a number*'
-	#'''
+			
+	with open('names.txt','r') as f:
+		names = f.read().split('\n')
 	with open(options[selection],'r') as f:
 		data = json.loads(f.read())
-	print '                             clinton  sanders   trump     cruz    kasich'
+
+	if 'note' in data:
+		note = data['note']
+		del data['note']
+	else:
+		note = 'no note found'
+	
+	
+	print len(data)
+	print ' '*26,
+	for name in names:
+		print (6-len(name))*' ',
+		print name,
+		if len(name) <5:
+			print ' ',	
+	print
 	for i in sorted(data):
-		print i,(30-len(i))*' ',data[i]['names'][0][1],(7-len(str(data[i]['names'][0][1])))*' ',data[i]['names'][1][1],(7-len(str(data[i]['names'][1][1])))*' ',data[i]['names'][2][1],(7-len(str(data[i]['names'][2][1])))*' ',data[i]['names'][3][1],(7-len(str(data[i]['names'][3][1])))*' ',data[i]['names'][4][1]
-	
-	
-	
-	#print options
+		print i,(28-len(i))*' ',#data[i]['names'][0][1],
+		#print 'good','i:',i
+		for j in data[i]['names']:
+			#print 'not good'
+			print j[1],(7-len(str(j[1])))*' ',			
+		print
+	print ' data from file:',options[selection]
+	print ' ## note:',note
+		
 if __name__ == '__main__':
 	main()

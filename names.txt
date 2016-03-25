@@ -1,0 +1,10 @@
+clinton
+sanders
+trump
+cruz
+kasich
+rubio
+carson
+christie
+bush
+obama

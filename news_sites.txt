@@ -1,0 +1,116 @@
+new york times
+http://www.nytimes.com
+new york times politics
+http://www.nytimes.com/pages/politics/index.html?action=click&pgtype=Homepage&region=TopBar&module=HPMiniNav&contentCollection=Politics&WT.nav=page
+cnn
+http://www.cnn.com
+cnn politics
+http://www.cnn.com/politics
+cnn election
+http://www.cnn.com/election/
+washington post
+https://www.washingtonpost.com
+washington post politics
+https://www.washingtonpost.com/politics/?nid=top_nav_politics
+fox news
+http://www.foxnews.com
+fox news politics
+http://www.foxnews.com/politics.html?intcmp=hpnav
+fox news election
+http://www.foxnews.com/politics/elections/2016/presidential-election-headquarters?intcmp=subnav
+msnbc
+http://www.msnbc.com
+msnbc election
+http://www.nbcnews.com/politics/2016-election
+nbc news
+http://www.nbcnews.com
+nbc politics
+http://www.nbcnews.com/politics
+nbc election
+http://www.nbcnews.com/politics/2016-election
+cbs news
+http://www.cbsnews.com
+cbs politics
+http://www.cbsnews.com/politics/
+abc news
+http://a.abcnews.com
+abc politics (election)
+http://abcnews.go.com/Politics/Election
+yahoo news
+http://news.yahoo.com
+yahoo politics
+https://www.yahoo.com/politics?ref=gs
+usatoday
+http://www.usatoday.com
+usatoday election
+http://www.usatoday.com/section/global/elections-2016/
+npr news
+http://www.npr.org/sections/news/
+npr politics
+http://www.npr.org/sections/politics/
+reuters news
+http://www.reuters.com/news
+reuters politics
+http://www.reuters.com/politics
+usnews
+http://www.usnews.com/news
+usnews politics
+http://www.usnews.com/politics
+nypost news
+http://nypost.com/news/
+bbc news
+http://www.bbc.com/news
+bbc us & canada
+http://www.bbc.com/news/world/us_and_canada
+bbc us election
+http://www.bbc.com/news/election/us2016
+msn
+http://www.msn.com/en-us/news
+msn politics
+http://www.msn.com/en-us/news/politics
+chicago tribune
+http://www.chicagotribune.com/news/local/breaking/
+slate
+http://www.slate.com/
+slate politics
+http://www.slate.com/articles/news_and_politics.html
+aljazeera
+http://www.aljazeera.com/news/
+aljazeera (us election)
+http://www.aljazeera.com/topics/events/election-2016.html
+aol news
+http://www.aol.com/news/
+buzzfeed news
+http://www.buzzfeed.com/news
+buzzfeed politics
+http://www.buzzfeed.com/politics
+boston.com news
+http://www.boston.com/section/news
+huffington post
+http://www.huffingtonpost.com/
+huffington post politics
+http://www.huffingtonpost.com/politics/
+los angeles times
+http://www.latimes.com/
+los angeles times politics
+http://www.latimes.com/politics/
+the guardian (us)
+http://www.theguardian.com/us
+the guardian (us election)
+http://www.theguardian.com/us-news/us-elections-2016
+wall street journal
+http://www.wsj.com/
+wall street journal politics
+http://www.wsj.com/news/politics
+time
+http://time.com/
+time politics
+http://time.com/politics/
+dailybeast
+http://www.thedailybeast.com/
+dailiybeast politics
+http://www.thedailybeast.com/politics.html
+atlantic
+http://www.theatlantic.com/
+atlantic politics
+http://www.theatlantic.com/politics/

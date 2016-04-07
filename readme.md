@@ -1,3 +1,7 @@
+Sample matplotlib output data:
+![primary sample 1](https://github.com/markedwinharvey/primary/blob/master/media/analyze.avgs.png)
+![primary sample 2](https://github.com/markedwinharvey/primary/blob/master/media/journal_timelines.png)
+
 `primary.py` uses the requests module to scrape US presidential candidates' names from 
 news and politics sites listed in `news_sites.txt`, compared against names in `names.txt`. The 
 data is automatically saved in a csv-formatted file as 'dat2_'+current date/time, with optional note

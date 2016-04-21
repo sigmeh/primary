@@ -1,5 +1,5 @@
 Sample matplotlib output data:
-![primary sample 1](https://github.com/markedwinharvey/primary/blob/master/media/p_update1.png)
+![primary sample 1](https://github.com/markedwinharvey/primary/blob/master/media/p_update2.png)
 ![primary sample 2](https://github.com/markedwinharvey/primary/blob/master/media/journal_timelines.png)
 
 `primary.py` uses the requests module to scrape US presidential candidates' names from 

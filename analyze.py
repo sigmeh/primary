@@ -28,7 +28,7 @@ def journal_timelines_maker(journal_timelines,this_data):
 def graph_journal_timelines(journal_timelines,num_files):
 	#-----place hashtag before names to hide their data-----#
 	show_names = '''
-			#clinton,
+			clinton,
 			sanders,
 			trump,
 			#cruz,
@@ -85,7 +85,7 @@ def main():
 		coll_totals.append(single_coll_total)				#total mentions for each candidate in all journals per query
 		
 		#graph journal-dependent data
-	graph_journal_timelines(journal_timelines,num_files)
+	#graph_journal_timelines(journal_timelines,num_files)
 	
 	for i in coll_totals:
 		all_cand_sum = sum(i)
@@ -98,8 +98,9 @@ def main():
 	#----------------------start plotting averages---------------------------#
 	fig = plt.figure()
 	ax = fig.add_subplot(111)
-	ax1=fig.add_subplot(211)
-	ax2=fig.add_subplot(212)
+	ax1=fig.add_subplot(221)
+	ax2=fig.add_subplot(223)
+	ax3=fig.add_subplot(224,sharey=ax2)
 	
 	for i in range(4):
 		ax.spines['top bottom left right'.split(' ')[i]].set_color('none')
@@ -107,27 +108,62 @@ def main():
 	
 	color_map = 'blue,green,red,cyan,magenta'.split(',')
 	
+		#--------------begin adjust data chronology----------------#	
+	time_adjust = [x[10:] for x in files]
+	day_num = 0
+	for i in time_adjust:
+		i = i.split('-')
+		i[1:] = i[1].split('_')
+		i[2:] = i[2].split(':')
+		i=i[:-1]
+		i = [int(x) for x in i]
+		i[0]=i[0]-3	
+		#-------------------end adjust---------------------#
+	
+	
+		#-----plot averages-------#
 	coll_totals = np.array(coll_totals)
 	for cand in range(len(curr_cand)):
-		ax1.plot(range(len(files)),coll_percents[:,cand],label=curr_cand[cand])		
-		ax2.plot(range(len(files)),coll_totals[:,cand],label=curr_cand[cand])
+		ax1.plot(range(len(files)),coll_percents[:,cand],label=curr_cand[cand],color=color_map[cand])		
+		ax2.plot(range(len(files)),coll_totals[:,cand],label=curr_cand[cand],color=color_map[cand])
 	
 	box = ax1.get_position()
-	ax1.set_position([box.x0, box.y0, box.width * 0.8, box.height])
+	ax1.set_position([box.x0, box.y0, box.width * 1, box.height])
 	box = ax2.get_position()
-	ax2.set_position([box.x0, box.y0, box.width * 0.8, box.height])
+	ax2.set_position([box.x0, box.y0, box.width * 1, box.height])
+	box = ax3.get_position()
+	ax3.set_position([box.x0, box.y0, box.width * 1, box.height])
 
 	#----legend----#
-	ax1.legend(loc='top left', bbox_to_anchor=(1, 1),fontsize=12,numpoints=1)
+	ax1.legend(loc='upper left', bbox_to_anchor=(1, 1),fontsize=12,numpoints=1)
+	
 	#-----titles and labels-----#
 	font_size = 12
+	
 	ax1.set_title('avg. percent appearances',fontsize=font_size)
 	ax1.set_ylabel('avg. percent')
+	
 	ax2.set_title('raw totals from collected data',fontsize=font_size)
 	ax2.set_ylabel('raw numbers')
+	
+	ax3.set_title('trendlines from raw data',fontsize=font_size)
+	
 	plt.xlabel('query number, March 24, 2016 - present')
 	#plt.tight_layout()
-	plt.show()
 
+	#-----plot trendlines-----#	
+	from trendline import trendline
+	
+	coll_total_trendlines = []
+	for cand in range(len(curr_cand)):
+		y_vals = coll_totals[:,cand]
+		xy_array = np.array([[x,y_vals[x]] for x in range(len(y_vals))])
+		th0,th1 = trendline.get_trendline(xy_array)	
+		ax3.plot([0,len(files)],[th0,th1*len(files)+th0],label=curr_cand[cand]+' '+str(th1),color=color_map[cand])
+		
+	ax3.legend(loc='upper right',bbox_to_anchor=(1, 2),fontsize=12,numpoints=1,title='slope data')
+	
+	#----------------plot show----------------#
+	plt.show()
 if __name__ == '__main__':
 	main()

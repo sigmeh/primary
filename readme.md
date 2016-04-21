@@ -26,6 +26,8 @@ by eliminating/commenting the area in the code where the website data is shrunk 
 `primary2.py` offers to open a selection of the available data and displays the selected data as a 
 mini ascii spreadsheet. 
 
-`analyze.py` is a work in progress script to refine and visualize the data. The script uses matplotlib and numpy
-to assist in these efforts. Currently, average candidate data per query (over all journals) is visualized, 
-as well as the breakdown of results from each journal, plotted over time. 
+`analyze.py` visualizes the available data (numpy/matplotlib), the average percentage per query (over all journals) and the 
+raw totals from all journals. 
+A trendline-finding module was added and incorporated into the visualization, such that the program 
+also plots the results of linear regression on each data set to show overall trends. 
+An additional plotting function looks at the spread of all data points from all media sources assayed. An example is shown. 

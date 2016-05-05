@@ -12,6 +12,8 @@ import matplotlib.patches as mpatches
 import numpy as np
 from matplotlib import gridspec as gs
 mpl.rc('figure',facecolor='white')
+from pylab import rcParams
+rcParams['figure.figsize'] = 17, 13
 
 def journal_timelines_maker(journal_timelines,this_data):
 	for row in this_data:
@@ -97,10 +99,12 @@ def main():
 	
 	#----------------------start plotting averages---------------------------#
 	fig = plt.figure()
+	#fig.set_size_inches(18.5, 10.5)
 	ax = fig.add_subplot(111)
-	ax1=fig.add_subplot(221)
-	ax2=fig.add_subplot(223)
-	ax3=fig.add_subplot(224,sharey=ax2)
+	ax1=fig.add_subplot(331)
+	ax2=fig.add_subplot(334)
+	ax3=fig.add_subplot(335,sharey=ax2)
+	
 	
 	for i in range(4):
 		ax.spines['top bottom left right'.split(' ')[i]].set_color('none')
@@ -146,13 +150,12 @@ def main():
 	ax2.set_title('raw totals from collected data',fontsize=font_size)
 	ax2.set_ylabel('raw numbers')
 	
-	ax3.set_title('trendlines from raw data',fontsize=font_size)
-	
-	plt.xlabel('query number, March 24, 2016 - present')
+	#plt.xlabel('query number, March 24, 2016 - present')
 	#plt.tight_layout()
 
 	#-----plot trendlines-----#	
 	from trendline import trendline
+	ax3.set_title('linear trendlines from raw data',fontsize=font_size)
 	
 	coll_total_trendlines = []
 	for cand in range(len(curr_cand)):
@@ -160,10 +163,30 @@ def main():
 		xy_array = np.array([[x,y_vals[x]] for x in range(len(y_vals))])
 		th0,th1 = trendline.get_trendline(xy_array)	
 		ax3.plot([0,len(files)],[th0,th1*len(files)+th0],label=curr_cand[cand]+' '+str(th1),color=color_map[cand])
+
+	ax3.legend(loc='right',bbox_to_anchor=(1.6, .9),fontsize=12,numpoints=1,title='slope data')
+	
+	#-------------plot moving averages----------------#
+	ax4=fig.add_subplot(337,sharey=ax2)
+	ax4.set_title('simple moving averages',fontsize=font_size)
+	ax2.set_ylabel('raw numbers')
+	
+	ax5=fig.add_subplot(338,sharey=ax2)
+	ax5.set_title('cumulative moving averages',fontsize=font_size)
+	
+	cum_moving_averages=np.array([coll_totals[0]])
+	simple_moving_averages=np.array([coll_totals[0]])
+	for i in range(1,len(coll_totals)):
+		simple_moving_averages=np.vstack(( simple_moving_averages, (coll_totals[i]+simple_moving_averages[i-1])/2 ))
+		cum_moving_averages=np.vstack(( cum_moving_averages,  sum(  coll_totals[:i+1,:]  )/(i+1)  ))
 		
-	ax3.legend(loc='upper right',bbox_to_anchor=(1, 2),fontsize=12,numpoints=1,title='slope data')
+	for cand in range(len(curr_cand)):
+		ax4.plot(range(len(files)),simple_moving_averages[:,cand],label=curr_cand[cand],color=color_map[cand])
+		ax5.plot( range(len(files)),cum_moving_averages[:,cand],label=curr_cand[cand],color=color_map[cand] )
+		
 	
 	#----------------plot show----------------#
+	
 	plt.show()
 if __name__ == '__main__':
 	main()

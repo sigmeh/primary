@@ -37,22 +37,27 @@ def graph_journal_timelines(journal_timelines,num_files):
 			#kasich'''
 	#type = 'plot'
 	type='scatter'
-	colors = 'red green blue yellow orange'.split(' ')
 	name_map = [1 if x and x[0] != '#' else 0 for x in show_names.replace('\n','').replace('\t','').split(',') ]
-	color_map = 'red green blue yellow orange'.split(' ')	
+	color_map = 'blue green red yellow orange'.split(' ')	
 	plot_names = ' vs. '.join([x for x in show_names.replace('\n','').replace('\t','').split(',') if x and x[0] != '#'])
 	
 	for journal in journal_timelines.iterkeys():	
 		for i in range(5):
 			if name_map[i]:
 				eval('plt.'+type+'(range(num_files),journal_timelines[journal][:,'+str(i)+'],color=\''+str(color_map[i])+'\',alpha=.15,label=\''+plot_names[i]+'\')')
-
-	label_color='blue'
-	plt.title(plot_names+':\n % name occurrence (for 5 current candidates) in all journals',color=label_color)
-	plt.xlabel('query number (from March 24, 2016)',fontsize=14,color=label_color)
-	plt.ylabel('% name each journal',fontsize=14,color=label_color)
+	
+	plt.title(plot_names+':\n % name occurrence for each journal')
+	plt.xlabel('query number (March 24 - May 30 2016)',fontsize=14)
+	plt.ylabel('% name each journal',fontsize=14)
+	
 	ax = plt.subplot()
 	ax.set_axis_bgcolor('white')
+	
+	Clinton, = plt.plot([], label='Clinton')
+	Sanders, = plt.plot([], label='Sanders')
+	Trump, = plt.plot([], label='Trump')
+	plt.legend(handles=[Clinton, Sanders, Trump])
+	
 	plt.tight_layout()
 	plt.show()
 
@@ -87,7 +92,7 @@ def main():
 		coll_totals.append(single_coll_total)				#total mentions for each candidate in all journals per query
 		
 		#graph journal-dependent data
-	#graph_journal_timelines(journal_timelines,num_files)
+	graph_journal_timelines(journal_timelines,num_files)
 	
 	for i in coll_totals:
 		all_cand_sum = sum(i)
@@ -104,8 +109,7 @@ def main():
 	ax1=fig.add_subplot(331)
 	ax2=fig.add_subplot(334)
 	ax3=fig.add_subplot(335,sharey=ax2)
-	
-	
+		
 	for i in range(4):
 		ax.spines['top bottom left right'.split(' ')[i]].set_color('none')
 	ax.tick_params(labelcolor='w', top='off', bottom='off', left='off', right='off')
@@ -154,6 +158,7 @@ def main():
 	#plt.tight_layout()
 
 	#-----plot trendlines-----#	
+	#'''
 	from trendline import trendline
 	ax3.set_title('linear trendlines from raw data',fontsize=font_size)
 	
@@ -164,8 +169,8 @@ def main():
 		th0,th1 = trendline.get_trendline(xy_array)	
 		ax3.plot([0,len(files)],[th0,th1*len(files)+th0],label=curr_cand[cand]+' '+str(th1),color=color_map[cand])
 
-	ax3.legend(loc='right',bbox_to_anchor=(1.6, .9),fontsize=12,numpoints=1,title='slope data')
-	
+	ax3.legend(loc='right',bbox_to_anchor=(1.6, .7),fontsize=12,numpoints=1,title='slope data') #legend
+	#'''
 	#-------------plot moving averages----------------#
 	ax4=fig.add_subplot(337,sharey=ax2)
 	ax4.set_title('simple moving averages',fontsize=font_size)
@@ -174,8 +179,9 @@ def main():
 	ax5=fig.add_subplot(338,sharey=ax2)
 	ax5.set_title('cumulative moving averages',fontsize=font_size)
 	
-	cum_moving_averages=np.array([coll_totals[0]])
 	simple_moving_averages=np.array([coll_totals[0]])
+	cum_moving_averages=np.array([coll_totals[0]])
+	
 	for i in range(1,len(coll_totals)):
 		simple_moving_averages=np.vstack(( simple_moving_averages, (coll_totals[i]+simple_moving_averages[i-1])/2 ))
 		cum_moving_averages=np.vstack(( cum_moving_averages,  sum(  coll_totals[:i+1,:]  )/(i+1)  ))
@@ -184,7 +190,6 @@ def main():
 		ax4.plot(range(len(files)),simple_moving_averages[:,cand],label=curr_cand[cand],color=color_map[cand])
 		ax5.plot( range(len(files)),cum_moving_averages[:,cand],label=curr_cand[cand],color=color_map[cand] )
 		
-	
 	#----------------plot show----------------#
 	
 	plt.show()

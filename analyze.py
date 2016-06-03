@@ -5,6 +5,8 @@
 	Plot using matplotlib
 '''
 import subprocess
+from datetime import datetime
+import calendar
 import matplotlib as mpl
 mpl.use('TkAgg')
 import matplotlib.pyplot as plt
@@ -14,6 +16,7 @@ from matplotlib import gridspec as gs
 mpl.rc('figure',facecolor='white')
 from pylab import rcParams
 rcParams['figure.figsize'] = 17, 13
+
 
 def journal_timelines_maker(journal_timelines,this_data):
 	for row in this_data:
@@ -47,7 +50,12 @@ def graph_journal_timelines(journal_timelines,num_files):
 				eval('plt.'+type+'(range(num_files),journal_timelines[journal][:,'+str(i)+'],color=\''+str(color_map[i])+'\',alpha=.15,label=\''+plot_names[i]+'\')')
 	
 	plt.title(plot_names+':\n % name occurrence for each journal')
-	plt.xlabel('query number (March 24 - May 30 2016)',fontsize=14)
+	
+	#----format date msg for x label
+	year,month,day= str(datetime.now()).split()[0].split('-')
+	date_msg='Query number (March 24, 2016 - '+calendar.month_name[int(month)]+' '+day+', '+year+')'
+	
+	plt.xlabel(date_msg,fontsize=14)
 	plt.ylabel('% name each journal',fontsize=14)
 	
 	ax = plt.subplot()
@@ -94,6 +102,7 @@ def main():
 		#graph journal-dependent data
 	graph_journal_timelines(journal_timelines,num_files)
 	
+	#--------get percentage appearances---------#
 	for i in coll_totals:
 		all_cand_sum = sum(i)
 		coll_percents.append([int(1000.*x/all_cand_sum)/10. for x in i])
@@ -101,6 +110,8 @@ def main():
 
 	avg_percents = [int(10*sum(coll_percents[:,x])/num_files)/10. for x in range(5)]
 	print np.array(avg_percents),'(avg)'
+	#--------end get percentage appearances---------#
+	
 	
 	#----------------------start plotting averages---------------------------#
 	fig = plt.figure()
@@ -154,10 +165,11 @@ def main():
 	ax2.set_title('raw totals from collected data',fontsize=font_size)
 	ax2.set_ylabel('raw numbers')
 	
-	#plt.xlabel('query number, March 24, 2016 - present')
+	#----format date msg for x label
+	
 	#plt.tight_layout()
 
-	#-----plot trendlines-----#	
+	#--------plot trendlines--------#
 	#'''
 	from trendline import trendline
 	ax3.set_title('linear trendlines from raw data',fontsize=font_size)
@@ -171,27 +183,42 @@ def main():
 
 	ax3.legend(loc='right',bbox_to_anchor=(1.6, .7),fontsize=12,numpoints=1,title='slope data') #legend
 	#'''
+	#--------end plot trendlines--------#
+	
 	#-------------plot moving averages----------------#
+	
+	
+		#--------simple moving averages--------#
 	ax4=fig.add_subplot(337,sharey=ax2)
 	ax4.set_title('simple moving averages',fontsize=font_size)
-	ax2.set_ylabel('raw numbers')
+	ax4.set_ylabel('based on raw numbers')
 	
+	simple_moving_averages=np.array([coll_totals[0],coll_totals[1],coll_totals[2]])
+	for i in range(3,len(coll_totals)-3):
+		simple_moving_averages=np.vstack(( simple_moving_averages, (  sum([coll_totals[x] for x in range(i-3,i+4)])  )/7))				
+	for cand in range(len(curr_cand)):
+		ax4.plot(range(len(simple_moving_averages)),simple_moving_averages[:,cand],label=curr_cand[cand],color=color_map[cand])
+		#--------end simple moving averages--------#
+	
+	
+		#--------cumulative moving averages--------#
 	ax5=fig.add_subplot(338,sharey=ax2)
 	ax5.set_title('cumulative moving averages',fontsize=font_size)
 	
-	simple_moving_averages=np.array([coll_totals[0]])
 	cum_moving_averages=np.array([coll_totals[0]])
-	
 	for i in range(1,len(coll_totals)):
-		simple_moving_averages=np.vstack(( simple_moving_averages, (coll_totals[i]+simple_moving_averages[i-1])/2 ))
-		cum_moving_averages=np.vstack(( cum_moving_averages,  sum(  coll_totals[:i+1,:]  )/(i+1)  ))
-		
+		cum_moving_averages=np.vstack(( cum_moving_averages,  (cum_moving_averages[i-1]*(i) + coll_totals[i])/(i+1)  ))
 	for cand in range(len(curr_cand)):
-		ax4.plot(range(len(files)),simple_moving_averages[:,cand],label=curr_cand[cand],color=color_map[cand])
 		ax5.plot( range(len(files)),cum_moving_averages[:,cand],label=curr_cand[cand],color=color_map[cand] )
-		
-	#----------------plot show----------------#
+		#--------end cumulative moving averages--------#
 	
+	
+	#----------------plot show----------------#
+	year,month,day= str(datetime.now()).split()[0].split('-')
+	date_msg='Query number (March 24, 2016 - '+calendar.month_name[int(month)]+' '+day+', '+year+')'
+	#plt.title(date_msg)
+	ax.set_xlabel(date_msg)
 	plt.show()
+	
 if __name__ == '__main__':
 	main()

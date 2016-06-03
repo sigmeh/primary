@@ -1,6 +1,6 @@
 Sample matplotlib output data:
-![primary sample 1](https://github.com/markedwinharvey/primary/blob/master/media/p_update4.png)
-![primary sample 2](https://github.com/markedwinharvey/primary/blob/master/media/jt_update1.png)
+![primary sample 1](https://github.com/markedwinharvey/primary/blob/master/media/p_update5.png)
+![primary sample 2](https://github.com/markedwinharvey/primary/blob/master/media/jt_update2.png)
 
 `primary.py` uses the requests module to scrape US presidential candidates' names from 
 news and politics sites listed in `news_sites.txt`, compared against names in `names.txt`. The 

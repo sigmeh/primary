@@ -1,0 +1,60 @@
+clinton,sanders,trump,cruz,kasich,rubio,carson,christie,bush,obama
+abc news,2,8,2,0,0,0,0,0,0,3
+abc politics (election),27,17,42,1,0,0,1,1,1,1
+aljazeera (us election),8,8,37,1,0,0,0,0,0,0
+aljazeera,0,0,0,0,0,0,0,0,0,0
+aol news,1,0,6,0,0,0,0,0,0,1
+atlantic politics,6,2,29,2,0,0,0,0,0,7
+atlantic,0,0,0,0,0,0,0,0,0,0
+bbc news,2,0,4,0,0,0,0,0,0,0
+bbc us & canada,0,1,17,0,0,0,0,0,0,0
+bbc us election,13,5,37,1,0,0,0,0,0,0
+boston.com news,1,2,3,0,0,0,0,0,0,1
+buzzfeed news,2,0,4,3,0,0,0,0,0,0
+buzzfeed politics,9,5,34,1,0,2,0,0,0,5
+cbs news,7,5,12,0,0,1,0,0,0,4
+cbs politics,16,7,37,0,0,1,0,0,0,7
+chicago tribune,0,1,2,0,0,0,0,0,0,1
+cnn politics,0,0,0,0,0,0,0,0,0,0
+cnn,0,2,1,0,0,0,0,0,0,0
+dailiybeast politics,3,2,14,0,0,1,0,0,0,0
+dailybeast,3,9,32,0,0,0,0,0,0,17
+fox news election,6,6,21,0,0,2,0,0,0,2
+fox news politics,8,5,22,0,1,1,0,0,0,3
+fox news,9,2,4,0,0,0,0,0,0,2
+huffington post politics,15,16,39,0,0,2,0,0,0,8
+huffington post,10,12,21,0,0,2,0,0,0,8
+los angeles times politics,14,80,46,0,0,0,0,0,0,7
+los angeles times,2,7,11,0,0,0,0,0,0,1
+msn politics,3,4,3,0,0,0,0,0,0,1
+msn,2,1,2,0,0,0,0,0,0,1
+msnbc election,41,50,87,1,1,11,1,0,1,4
+msnbc,6,12,15,0,0,1,0,0,0,1
+nbc election,41,50,87,1,1,11,1,0,1,4
+nbc news,3,6,7,0,0,0,0,0,0,2
+nbc politics,18,12,21,1,0,0,0,0,0,35
+new york times politics,7,2,24,0,0,0,0,0,0,3
+new york times,0,0,6,0,0,0,0,0,0,5
+npr news,0,0,0,0,0,0,0,0,0,3
+npr politics,21,14,31,0,0,0,0,0,0,4
+nypost news,2,2,5,0,0,0,0,0,0,3
+reuters news,0,1,0,0,0,0,0,0,0,0
+reuters politics,1,3,10,0,0,1,0,0,0,0
+slate politics,1,1,13,0,0,0,0,0,0,3
+slate,3,1,26,0,0,0,0,0,0,2
+the guardian (us election),27,32,84,12,1,3,0,0,2,6
+the guardian (us),8,14,19,8,0,0,0,0,0,10
+time politics,2,3,4,0,0,1,3,0,0,2
+time,0,2,6,0,0,0,0,0,0,3
+usatoday election,15,6,39,10,0,0,0,0,0,3
+usatoday,3,3,4,0,0,0,0,0,0,0
+usnews politics,1,3,7,1,0,2,0,0,0,0
+usnews,1,3,27,3,0,5,0,2,4,1
+wall street journal politics,14,5,21,0,0,0,0,0,0,2
+wall street journal,7,1,3,1,0,0,0,0,0,1
+washington post politics,8,10,13,0,0,1,0,0,0,2
+washington post,3,3,7,1,0,0,0,0,0,2
+yahoo news,5,6,2,0,0,0,0,0,0,1
+yahoo politics,11,22,42,0,1,0,0,0,0,11
+#collected,2016-05-31_02:30:15,since_epoch,1464687015.41
+#note,add epoch time, four-hour increment test

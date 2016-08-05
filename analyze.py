@@ -7,11 +7,12 @@
 import subprocess
 from datetime import datetime
 import calendar
+import numpy as np
+
 import matplotlib as mpl
 mpl.use('TkAgg')
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-import numpy as np
 from matplotlib import gridspec as gs
 mpl.rc('figure',facecolor='white')
 from pylab import rcParams
@@ -67,7 +68,9 @@ def graph_journal_timelines(journal_timelines,num_files):
 	plt.legend(handles=[Clinton, Sanders, Trump])
 	
 	plt.tight_layout()
-	plt.show()
+	
+	plt.savefig('media/jt_'+str(datetime.now()).split('.')[0].replace(' ','_')+'.png')
+	#plt.show()
 
 #-----main-----#
 def main():
@@ -115,7 +118,6 @@ def main():
 	
 	#----------------------start plotting averages---------------------------#
 	fig = plt.figure()
-	#fig.set_size_inches(18.5, 10.5)
 	ax = fig.add_subplot(111)
 	ax1=fig.add_subplot(331)
 	ax2=fig.add_subplot(334)
@@ -126,18 +128,6 @@ def main():
 	ax.tick_params(labelcolor='w', top='off', bottom='off', left='off', right='off')
 	
 	color_map = 'blue,green,red,cyan,magenta'.split(',')
-	
-		#--------------begin adjust data chronology----------------#	
-	time_adjust = [x[10:] for x in files]
-	day_num = 0
-	for i in time_adjust:
-		i = i.split('-')
-		i[1:] = i[1].split('_')
-		i[2:] = i[2].split(':')
-		i=i[:-1]
-		i = [int(x) for x in i]
-		i[0]=i[0]-3	
-		#-------------------end adjust---------------------#
 	
 	
 		#-----plot averages-------#
@@ -218,7 +208,9 @@ def main():
 	date_msg='Query number (March 24, 2016 - '+calendar.month_name[int(month)]+' '+day+', '+year+')'
 	#plt.title(date_msg)
 	ax.set_xlabel(date_msg)
-	plt.show()
+	
+	plt.savefig('media/primary_'+str(datetime.now()).split('.')[0].replace(' ','_')+'.png'  )
+	#plt.show()
 	
 if __name__ == '__main__':
 	main()

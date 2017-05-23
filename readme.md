@@ -5,7 +5,7 @@
 Sample matplotlib output data:
 ![primary sample 1](https://github.com/sigmeh/primary/blob/master/media/primary_2016-08-04_16:02:12.png)
 ![primary sample 2](https://github.com/sigmeh/primary/blob/master/media/jt_2016-08-04_16:02:07.png)
-
+ 
 
 <h5>primary.py</h5>
 
